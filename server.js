@@ -29,17 +29,17 @@ const MENU_OPCIONES = [
   {
     id: "opt_horarios",
     title: "🕐 Horarios",
-    respuesta: "Nuestros horarios de salida León → GDL son: [PON AQUÍ LOS HORARIOS]. Los regresos GDL → León son: [PON AQUÍ LOS HORARIOS].",
+    respuesta: "🕐 *Horarios Quick Ride:*\n\nLeón → Guadalajara: viernes, sábado y domingo a las 7:00 AM y 3:00 PM\n\nGuadalajara → León: viernes, sábado y domingo a las 11:00 AM y 7:00 PM",
   },
   {
     id: "opt_precio",
     title: "💰 Costo del viaje",
-    respuesta: "El costo del viaje León → Guadalajara es de $[PON PRECIO] por persona. [Agrega si hay tarifa de ida y vuelta, grupos, etc.]",
+    respuesta: "💰 El costo del viaje León ⇄ Guadalajara es de $300 pesos por persona.",
   },
   {
     id: "opt_puntos",
     title: "📍 Puntos de salida",
-    respuesta: "Salimos de [PON PUNTO DE SALIDA EN LEÓN] y llegamos a [PON PUNTO DE LLEGADA EN GDL].",
+    respuesta: "📍 Salimos de Plaza Paseo Morelos (León) y llegamos a la zona del Consulado (Guadalajara). El regreso es desde esos mismos puntos.",
   },
   {
     id: "opt_reservar",
@@ -49,12 +49,12 @@ const MENU_OPCIONES = [
   {
     id: "opt_pago",
     title: "💳 Formas de pago",
-    respuesta: "Aceptamos: [PON AQUÍ TUS FORMAS DE PAGO, ej. efectivo, transferencia]. [Agrega datos bancarios si aplica].",
+    respuesta: "💳 Aceptamos pago en efectivo o por transferencia:\n\nBanco: BBVA\nCuenta: 0123456789\nCLABE: 012180001234567895\nA nombre de: Quick Ride Transportes\n\nPor favor manda tu comprobante después de transferir 🙏",
   },
   {
     id: "opt_asesor",
     title: "📞 Hablar con alguien",
-    respuesta: "Claro, en breve te contactamos directamente. Mientras tanto puedes llamarnos al [PON TU NÚMERO] si es urgente.",
+    respuesta: "Claro, en breve te contactamos directamente. Mientras tanto puedes llamarnos al 477 641 7424 si es urgente.",
   },
 ];
 
@@ -114,7 +114,7 @@ app.post("/webhook", async (req, res) => {
     // Primera vez que escribe -> saludo + menú
     if (!yaSaludados.has(from)) {
       yaSaludados.add(from);
-      await sendWhatsAppMessage(from, "¡Hola! 👋 Bienvenido a [NOMBRE DE TU NEGOCIO], transporte y tours León ⇄ Guadalajara. Elige una opción:");
+      await sendWhatsAppMessage(from, "¡Hola! 👋 Bienvenido a *Quick Ride*, transporte y tours León ⇄ Guadalajara. Elige una opción:");
       await sendMenu(from);
       return res.sendStatus(200);
     }
