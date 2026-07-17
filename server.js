@@ -28,22 +28,22 @@ const yaSaludados = new Set();
 const MENU_OPCIONES = [
   {
     id: "opt_horarios",
-    title: "🕐 Horarios de salida",
-    respuesta: "Nuestros horarios de salida León → GDL son: Viernes, Sábados y Domingos 7AM y 3PM. Los regresos GDL → León son: Viernes, Sábados y Domingos 11AM y 7PM.",
+    title: "🕐 Horarios",
+    respuesta: "Nuestros horarios de salida León → GDL son: [PON AQUÍ LOS HORARIOS]. Los regresos GDL → León son: [PON AQUÍ LOS HORARIOS].",
   },
   {
     id: "opt_precio",
     title: "💰 Costo del viaje",
-    respuesta: "El costo del viaje León → Guadalajara es de $300 por persona.",
+    respuesta: "El costo del viaje León → Guadalajara es de $[PON PRECIO] por persona. [Agrega si hay tarifa de ida y vuelta, grupos, etc.]",
   },
   {
     id: "opt_puntos",
-    title: "📍 Puntos de salida y llegada",
+    title: "📍 Puntos de salida",
     respuesta: "Salimos de [PON PUNTO DE SALIDA EN LEÓN] y llegamos a [PON PUNTO DE LLEGADA EN GDL].",
   },
   {
     id: "opt_reservar",
-    title: "✅ Reservar mi lugar",
+    title: "✅ Reservar lugar",
     respuesta: "¡Perfecto! Para apartar tu lugar mándame: tu nombre completo, fecha del viaje y número de pasajeros. En cuanto lo recibamos te confirmamos disponibilidad 🙌",
   },
   {
@@ -53,7 +53,7 @@ const MENU_OPCIONES = [
   },
   {
     id: "opt_asesor",
-    title: "🧑‍💼 Hablar con alguien",
+    title: "📞 Hablar con alguien",
     respuesta: "Claro, en breve te contactamos directamente. Mientras tanto puedes llamarnos al [PON TU NÚMERO] si es urgente.",
   },
 ];
@@ -90,7 +90,7 @@ app.post("/webhook", async (req, res) => {
 
     const from = message.from;
 
-    // --- Cliente tocó una opción del  ---
+    // --- Cliente tocó una opción del menú ---
     if (message.type === "interactive") {
       const selectedId = message.interactive?.list_reply?.id || message.interactive?.button_reply?.id;
       const opcion = MENU_OPCIONES.find((o) => o.id === selectedId);
@@ -114,7 +114,7 @@ app.post("/webhook", async (req, res) => {
     // Primera vez que escribe -> saludo + menú
     if (!yaSaludados.has(from)) {
       yaSaludados.add(from);
-      await sendWhatsAppMessage(from, "¡Hola! 👋 Bienvenido a Quick Ride, transporte y tours León ⇄ Guadalajara. Elige una opción:");
+      await sendWhatsAppMessage(from, "¡Hola! 👋 Bienvenido a [NOMBRE DE TU NEGOCIO], transporte y tours León ⇄ Guadalajara. Elige una opción:");
       await sendMenu(from);
       return res.sendStatus(200);
     }
