@@ -29,12 +29,12 @@ const MENU_OPCIONES = [
   {
     id: "opt_horarios",
     title: "🕐 Horarios de salida",
-    respuesta: "Nuestros horarios de salida León → GDL son: [PON AQUÍ LOS HORARIOS]. Los regresos GDL → León son: [PON AQUÍ LOS HORARIOS].",
+    respuesta: "Nuestros horarios de salida León → GDL son: Viernes, Sábados y Domingos 7AM y 3PM. Los regresos GDL → León son: Viernes, Sábados y Domingos 11AM y 7PM.",
   },
   {
     id: "opt_precio",
     title: "💰 Costo del viaje",
-    respuesta: "El costo del viaje León → Guadalajara es de $[PON PRECIO] por persona. [Agrega si hay tarifa de ida y vuelta, grupos, etc.]",
+    respuesta: "El costo del viaje León → Guadalajara es de $300 por persona.",
   },
   {
     id: "opt_puntos",
@@ -90,7 +90,7 @@ app.post("/webhook", async (req, res) => {
 
     const from = message.from;
 
-    // --- Cliente tocó una opción del menú ---
+    // --- Cliente tocó una opción del  ---
     if (message.type === "interactive") {
       const selectedId = message.interactive?.list_reply?.id || message.interactive?.button_reply?.id;
       const opcion = MENU_OPCIONES.find((o) => o.id === selectedId);
@@ -114,7 +114,7 @@ app.post("/webhook", async (req, res) => {
     // Primera vez que escribe -> saludo + menú
     if (!yaSaludados.has(from)) {
       yaSaludados.add(from);
-      await sendWhatsAppMessage(from, "¡Hola! 👋 Bienvenido a [NOMBRE DE TU NEGOCIO], transporte y tours León ⇄ Guadalajara. Elige una opción:");
+      await sendWhatsAppMessage(from, "¡Hola! 👋 Bienvenido a Quick Ride, transporte y tours León ⇄ Guadalajara. Elige una opción:");
       await sendMenu(from);
       return res.sendStatus(200);
     }
