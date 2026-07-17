@@ -1,0 +1,14 @@
+{
+  "name": "whatsapp-ia-bot",
+  "version": "1.0.0",
+  "description": "Bot de WhatsApp Business conectado a Claude (Anthropic) para ventas y captación de leads",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}
